@@ -40,3 +40,5 @@ nb-configuration.xml
 
 ##Ignore JRebel project configuration
 rebel.xml
+
+dependency-reduced-pom.xml

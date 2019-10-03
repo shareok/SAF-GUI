@@ -26,7 +26,7 @@ public class Builder extends javax.swing.JFrame {
     public Builder() {
         super("OU - Libraries");
         initComponents();
-        com.apple.eawt.Application.getApplication().setDockIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
+//        com.apple.eawt.Application.getApplication().setDockIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
     }
 
     private String abstractPath = null;
