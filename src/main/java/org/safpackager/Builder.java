@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import org.apache.commons.io.FilenameUtils;
+import org.safpackager.Cs.CgPackage;
 import org.safpackager.Cs.CsPackage;
 import org.safpackager.Cs.CsValidation;
 import org.safpackager.Cs.CtPackage;
@@ -44,6 +45,8 @@ public class Builder extends javax.swing.JFrame {
     private String ctPathToSave = null;
     private String ctPathToCollection = null;
     private CtValidation ctValidation = null;
+    private String cgPathToCollection = null;
+    private String cgPathToSave = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,10 +59,10 @@ public class Builder extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        panHome = new javax.swing.JPanel();
         lblHomeLogo = new javax.swing.JLabel();
         lblHomeApplication = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        panSAF = new javax.swing.JPanel();
         btnSAFOpenCSV = new javax.swing.JButton();
         lblSAFCSVPath = new javax.swing.JLabel();
         btnSAFGenerateSAF = new javax.swing.JButton();
@@ -67,7 +70,7 @@ public class Builder extends javax.swing.JFrame {
         btnSAFSelectPath = new javax.swing.JButton();
         lblSAFSelectedSavePath = new javax.swing.JLabel();
         lblSAFOutputDir = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        panCs = new javax.swing.JPanel();
         btnCsOpenCsv = new javax.swing.JButton();
         btnCsOpenSavePath = new javax.swing.JButton();
         lblCsCsvPath = new javax.swing.JLabel();
@@ -78,7 +81,7 @@ public class Builder extends javax.swing.JFrame {
         btnCsOpenPhotos = new javax.swing.JButton();
         lblCsPhotoPath = new javax.swing.JLabel();
         lblCsAlert = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        panCsT = new javax.swing.JPanel();
         btnCtOpenCollectionCsv = new javax.swing.JButton();
         lblCtCollectionPath = new javax.swing.JLabel();
         btnCtOpenCsv = new javax.swing.JButton();
@@ -87,7 +90,14 @@ public class Builder extends javax.swing.JFrame {
         lblCtAlert = new javax.swing.JLabel();
         btnCtOpenSavePath = new javax.swing.JButton();
         lblCtSavePath = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panCsG = new javax.swing.JPanel();
+        btnCgOpenCollectionCsv = new javax.swing.JButton();
+        btnCgOpenSavePath = new javax.swing.JButton();
+        lblCgCollectionPath = new javax.swing.JLabel();
+        btnCgGenerateGeo = new javax.swing.JButton();
+        lblCgSavePath = new javax.swing.JLabel();
+        lblCgAlert = new javax.swing.JLabel();
+        panHelp = new javax.swing.JPanel();
         lblHelpPrepareData = new javax.swing.JLabel();
         lblHelpGenerateSAF = new javax.swing.JLabel();
         lblHelpSampleCSV = new javax.swing.JLabel();
@@ -101,40 +111,40 @@ public class Builder extends javax.swing.JFrame {
 
         tabbedPane.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panHome.setBackground(new java.awt.Color(255, 255, 255));
 
         lblHomeLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         lblHomeApplication.setFont(new java.awt.Font("Lucida Grande", 1, 72)); // NOI18N
         lblHomeApplication.setText("SAFBuilder");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panHomeLayout = new javax.swing.GroupLayout(panHome);
+        panHome.setLayout(panHomeLayout);
+        panHomeLayout.setHorizontalGroup(
+            panHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panHomeLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(lblHomeLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHomeApplication, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        panHomeLayout.setVerticalGroup(
+            panHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panHomeLayout.createSequentialGroup()
+                .addGroup(panHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panHomeLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(lblHomeLogo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panHomeLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(lblHomeApplication)))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Home", jPanel1);
+        tabbedPane.addTab("Home", panHome);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        panSAF.setBackground(new java.awt.Color(255, 255, 255));
 
         btnSAFOpenCSV.setText("Open a csv file");
         btnSAFOpenCSV.addActionListener(new java.awt.event.ActionListener() {
@@ -161,44 +171,44 @@ public class Builder extends javax.swing.JFrame {
 
         lblSAFSelectedSavePath.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panSAFLayout = new javax.swing.GroupLayout(panSAF);
+        panSAF.setLayout(panSAFLayout);
+        panSAFLayout.setHorizontalGroup(
+            panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSAFLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panSAFLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblSAFOutputDir))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panSAFLayout.createSequentialGroup()
+                        .addGroup(panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSAFSelectPath)
                             .addComponent(lblSAFAlert)
                             .addComponent(btnSAFGenerateSAF)
                             .addComponent(btnSAFOpenCSV))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSAFCSVPath, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSAFSelectedSavePath, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSAFGenerateSAF, btnSAFOpenCSV, btnSAFSelectPath});
+        panSAFLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSAFGenerateSAF, btnSAFOpenCSV, btnSAFSelectPath});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblSAFCSVPath, lblSAFSelectedSavePath});
+        panSAFLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblSAFCSVPath, lblSAFSelectedSavePath});
 
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panSAFLayout.setVerticalGroup(
+            panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSAFLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSAFOpenCSV)
                     .addComponent(lblSAFCSVPath))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSAFAlert)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panSAFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSAFSelectPath)
                     .addComponent(lblSAFSelectedSavePath))
                 .addGap(10, 10, 10)
@@ -208,9 +218,9 @@ public class Builder extends javax.swing.JFrame {
                 .addContainerGap(177, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("SAF", jPanel2);
+        tabbedPane.addTab("SAF", panSAF);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        panCs.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCsOpenCsv.setText("Open cs csv");
         btnCsOpenCsv.setVisible(false);
@@ -251,52 +261,52 @@ public class Builder extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panCsLayout = new javax.swing.GroupLayout(panCs);
+        panCs.setLayout(panCsLayout);
+        panCsLayout.setHorizontalGroup(
+            panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panCsLayout.createSequentialGroup()
                         .addComponent(btnCsOpenPhotos)
                         .addGap(8, 8, 8)
                         .addComponent(lblCsPhotoPath))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(panCsLayout.createSequentialGroup()
                         .addComponent(btnCsOpenCollection)
                         .addGap(8, 8, 8)
                         .addComponent(lblCsCollectionPath))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(panCsLayout.createSequentialGroup()
                         .addComponent(btnCsOpenSavePath)
                         .addGap(8, 8, 8)
                         .addComponent(lblCsSavePath))
                     .addComponent(btnCsGenerateSaf)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(panCsLayout.createSequentialGroup()
                         .addComponent(btnCsOpenCsv)
                         .addGap(8, 8, 8)
                         .addComponent(lblCsCsvPath))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(panCsLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblCsAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panCsLayout.setVerticalGroup(
+            panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCsOpenCollection)
                     .addComponent(lblCsCollectionPath, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCsOpenCsv)
                     .addComponent(lblCsCsvPath))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCsOpenPhotos)
                     .addComponent(lblCsPhotoPath))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCsOpenSavePath)
                     .addComponent(lblCsSavePath))
                 .addGap(10, 10, 10)
@@ -306,9 +316,9 @@ public class Builder extends javax.swing.JFrame {
                 .addGap(90, 90, 90))
         );
 
-        tabbedPane.addTab("CS", jPanel4);
+        tabbedPane.addTab("CS", panCs);
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        panCsT.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCtOpenCollectionCsv.setText("Open tax collection csv");
         btnCtOpenCollectionCsv.addActionListener(new java.awt.event.ActionListener() {
@@ -341,44 +351,44 @@ public class Builder extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panCsTLayout = new javax.swing.GroupLayout(panCsT);
+        panCsT.setLayout(panCsTLayout);
+        panCsTLayout.setHorizontalGroup(
+            panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsTLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panCsTLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblCtAlert))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(panCsTLayout.createSequentialGroup()
                         .addComponent(btnCtOpenCollectionCsv)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCtCollectionPath))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(panCsTLayout.createSequentialGroup()
                         .addComponent(btnCtOpenCsv)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCtCsvPath))
                     .addComponent(btnCtGenerateTax)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(panCsTLayout.createSequentialGroup()
                         .addComponent(btnCtOpenSavePath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCtSavePath)))
                 .addContainerGap(394, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        panCsTLayout.setVerticalGroup(
+            panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsTLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCtOpenCollectionCsv)
                     .addComponent(lblCtCollectionPath))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCtOpenCsv)
                     .addComponent(lblCtCsvPath))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCsTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCtOpenSavePath)
                     .addComponent(lblCtSavePath))
                 .addGap(8, 8, 8)
@@ -388,9 +398,73 @@ public class Builder extends javax.swing.JFrame {
                 .addContainerGap(146, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("CS Tax", jPanel5);
+        tabbedPane.addTab("CS Tax", panCsT);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        panCsG.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnCgOpenCollectionCsv.setText("Open collection csv");
+        btnCgOpenCollectionCsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCgOpenCollectionCsvActionPerformed(evt);
+            }
+        });
+
+        btnCgOpenSavePath.setText("Select path to save");
+        btnCgOpenSavePath.setVisible(false);
+        btnCgOpenSavePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCgOpenSavePathActionPerformed(evt);
+            }
+        });
+
+        btnCgGenerateGeo.setText("Generate geo");
+        btnCgGenerateGeo.setVisible(false);
+        btnCgGenerateGeo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCgGenerateGeoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCsGLayout = new javax.swing.GroupLayout(panCsG);
+        panCsG.setLayout(panCsGLayout);
+        panCsGLayout.setHorizontalGroup(
+            panCsGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsGLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panCsGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panCsGLayout.createSequentialGroup()
+                        .addComponent(btnCgOpenCollectionCsv)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCgCollectionPath))
+                    .addGroup(panCsGLayout.createSequentialGroup()
+                        .addComponent(btnCgOpenSavePath)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCgSavePath))
+                    .addComponent(lblCgAlert)
+                    .addComponent(btnCgGenerateGeo))
+                .addContainerGap(418, Short.MAX_VALUE))
+        );
+        panCsGLayout.setVerticalGroup(
+            panCsGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCsGLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(panCsGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCgOpenCollectionCsv)
+                    .addComponent(lblCgCollectionPath))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panCsGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCgOpenSavePath)
+                    .addComponent(lblCgSavePath))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCgGenerateGeo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCgAlert)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("CS Geo", panCsG);
+
+        panHelp.setBackground(new java.awt.Color(255, 255, 255));
 
         lblHelpPrepareData.setText("<html> <b>How to prepare data:</b><br/> 1) A csv metadata file (See sample below)<br/> 2) PDF or other files must be in the same directory with the csv<br/> 3) The header of column for files must be named as \"filename\"<br/> 4) Use || to separate file names if an item has multiple files<br/> 5) Dublin core metadata starts with \"dc\", custom non dublin core metadata has formats like \"ou.group\" or \"ou.group.faculty\" <br/> </html>");
 
@@ -400,26 +474,26 @@ public class Builder extends javax.swing.JFrame {
 
         lblHelpCSVTitle.setText("sample csv file: ");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panHelpLayout = new javax.swing.GroupLayout(panHelp);
+        panHelp.setLayout(panHelpLayout);
+        panHelpLayout.setHorizontalGroup(
+            panHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panHelpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(panHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panHelpLayout.createSequentialGroup()
                         .addComponent(lblHelpPrepareData, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panHelpLayout.createSequentialGroup()
+                        .addGroup(panHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblHelpCSVTitle)
                             .addComponent(lblHelpGenerateSAF, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblHelpSampleCSV))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panHelpLayout.setVerticalGroup(
+            panHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panHelpLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblHelpPrepareData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -431,7 +505,7 @@ public class Builder extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabbedPane.addTab("Help", jPanel3);
+        tabbedPane.addTab("Help", panHelp);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -656,7 +730,6 @@ public class Builder extends javax.swing.JFrame {
             } else {
                 lblCtAlert.setText("Please select a csv file");
             }
-
         }        
     }//GEN-LAST:event_btnCtOpenCollectionCsvActionPerformed
 
@@ -723,6 +796,57 @@ public class Builder extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCtGenerateTaxActionPerformed
 
+    private void btnCgOpenCollectionCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCgOpenCollectionCsvActionPerformed
+
+        lblCgAlert.setText("");
+        lblCgCollectionPath.setText("");
+        
+        JFileChooser fc = new JFileChooser();
+
+        String fileName;
+        int r = fc.showOpenDialog(null);
+        if (r == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            fileName = file.getName();
+            cgPathToCollection = fc.getSelectedFile().getAbsolutePath();
+
+            if ("csv".equals(getExtensionByApacheCommonLib(fileName))) {
+                btnCgOpenSavePath.setVisible(true);
+                lblCgCollectionPath.setText(cgPathToCollection);
+            } else {
+                lblCgAlert.setText("Please select a csv file");
+            }
+        }
+    }//GEN-LAST:event_btnCgOpenCollectionCsvActionPerformed
+
+    private void btnCgOpenSavePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCgOpenSavePathActionPerformed
+
+        lblCgAlert.setText("");
+        lblCgSavePath.setText("");
+        
+        JFileChooser chooser = new JFileChooser();
+        String choosertitle = "Select a Directory";
+        chooser.setDialogTitle(choosertitle);
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            cgPathToSave = chooser.getSelectedFile().toString();
+            lblCgSavePath.setText(cgPathToSave);
+            btnCgGenerateGeo.setVisible(true);
+        }
+    }//GEN-LAST:event_btnCgOpenSavePathActionPerformed
+
+    private void btnCgGenerateGeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCgGenerateGeoActionPerformed
+        try {
+            CgPackage cgPackage = new CgPackage(cgPathToCollection, cgPathToSave);
+            cgPackage.writeGeoJs();
+            cgPackage.writeGeoJson();
+            lblCgAlert.setText("points.js and points.json were saved in " + cgPathToSave);
+        } catch (IOException ex) {
+            Logger.getLogger(Builder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCgGenerateGeoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -771,6 +895,9 @@ public class Builder extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCgGenerateGeo;
+    private javax.swing.JButton btnCgOpenCollectionCsv;
+    private javax.swing.JButton btnCgOpenSavePath;
     private javax.swing.JButton btnCsGenerateSaf;
     private javax.swing.JButton btnCsOpenCollection;
     private javax.swing.JButton btnCsOpenCsv;
@@ -784,11 +911,9 @@ public class Builder extends javax.swing.JFrame {
     private javax.swing.JButton btnSAFOpenCSV;
     private javax.swing.JButton btnSAFSelectPath;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lblCgAlert;
+    private javax.swing.JLabel lblCgCollectionPath;
+    private javax.swing.JLabel lblCgSavePath;
     private javax.swing.JLabel lblCsAlert;
     private javax.swing.JLabel lblCsCollectionPath;
     private javax.swing.JLabel lblCsCsvPath;
@@ -808,6 +933,12 @@ public class Builder extends javax.swing.JFrame {
     private javax.swing.JLabel lblSAFCSVPath;
     private javax.swing.JLabel lblSAFOutputDir;
     private javax.swing.JLabel lblSAFSelectedSavePath;
+    private javax.swing.JPanel panCs;
+    private javax.swing.JPanel panCsG;
+    private javax.swing.JPanel panCsT;
+    private javax.swing.JPanel panHelp;
+    private javax.swing.JPanel panHome;
+    private javax.swing.JPanel panSAF;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 
