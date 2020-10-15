@@ -1,5 +1,6 @@
 ## Ignore the MVN compiled output directories from version tracking
 target/
+resources
 
 ## Ignore tags index files created by Exuberant Ctags
 tags

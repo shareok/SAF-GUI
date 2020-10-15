@@ -100,7 +100,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="72" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="SAFBuilder"/>
+                <Property name="text" type="java.lang.String" value="SAF-GUI"/>
               </Properties>
             </Component>
           </SubComponents>

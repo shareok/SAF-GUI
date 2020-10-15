@@ -24,7 +24,7 @@ public class Builder extends javax.swing.JFrame {
      * Creates new form Builder
      */
     public Builder() {
-        super("OU - Libraries");
+        super("SAF-GUI");
         initComponents();
 //        com.apple.eawt.Application.getApplication().setDockIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
     }
@@ -68,7 +68,7 @@ public class Builder extends javax.swing.JFrame {
         lblHomeLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         lblHomeApplication.setFont(new java.awt.Font("Lucida Grande", 1, 72)); // NOI18N
-        lblHomeApplication.setText("SAFBuilder");
+        lblHomeApplication.setText("SAF-GUI");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
