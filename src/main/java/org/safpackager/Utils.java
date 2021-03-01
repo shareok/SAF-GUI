@@ -140,7 +140,7 @@ public class Utils {
     public static String getCollectionErrors(boolean validated) {
         String output = "";
         if(!validated) {
-            String e = "Not a collection metadata file exported from ShareOK ";
+            String e = "Please use collection metadata file exported from ShareOK ";
             output = "<html>";
             output += e + "<br/>";
             output += "</html>";            
@@ -168,4 +168,30 @@ public class Utils {
         return false;
     }
 
+    public static String getZipcodeErrors(boolean validated) {
+        String output = "";
+        if(!validated) {
+            String e = "Please use zipcode csv file ";
+            output = "<html>";
+            output += e + "<br/>";
+            output += "</html>";
+        }
+        return output;
+    }
+
+    public static boolean validateZipcodeCsv(String csvPath) throws IOException {
+        String[] headers = {"zip", "city", "state", "latitude", "longitude"};
+
+        CsvReader inputCSV = Utils.openCsv(csvPath);
+        inputCSV.readHeaders();
+        for (int j = 0; j < inputCSV.getHeaderCount(); j++) {
+            String s = inputCSV.getHeader(j);
+            for(String h : headers) {
+                if(s.contains(h)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

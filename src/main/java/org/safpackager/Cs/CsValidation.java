@@ -19,15 +19,15 @@ public class CsValidation {
 
     private CsvReader zipcodeReader;
     private CsvReader stateReader;
-    private Map<String, Map<String, ArrayList>> zipcodeData = new HashMap<String, Map<String, ArrayList>>();
-    private Map<String, String> statesData = new HashMap<String, String>();
+    private Map<String, Map<String, ArrayList>> zipcodeDatabaseData = new HashMap<String, Map<String, ArrayList>>();
+    private final Map<String, String> stateDatabaseData = new HashMap<String, String>();
     private static CsValidation validation = null;
     private File[] listOfImages = null;
+    private String csZipcodePath = null;
 
     public CsValidation() {
         try {
-            getStateData();
-            getZipcodeData();
+            getStateDatabaseData();
         } catch (IOException ex) {
             Logger.getLogger(CsValidation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,11 +95,16 @@ public class CsValidation {
         return errors;
     }
 
+    public void validateZipcode(String zipcodePath) throws IOException {
+        csZipcodePath = zipcodePath;
+        getZipcodeDatabaseData(zipcodePath);
+    }
+
     private boolean isZipPlaceMatched(String homeZip, String homeState, String homeCity){
         if(homeZip == null || "".equals(homeZip) || homeState == null || "".equals(homeState)|| homeCity == null || "".equals(homeCity)) {
             return false;
         }
-        Map<String, ArrayList> zipdata = zipcodeData.get(homeZip);
+        Map<String, ArrayList> zipdata = zipcodeDatabaseData.get(homeZip);
         List<String> stateData = null;
         List<String> cityData = null;
 
@@ -114,45 +119,65 @@ public class CsValidation {
         return false;
     }
 
-    private void getZipcodeData() throws IOException {
-        if(zipcodeData.size() == 0) {
+    private void getZipcodeDatabaseData(String csPathToZipcode) throws IOException {
+        if(zipcodeDatabaseData.size() == 0) {
             if(zipcodeReader == null) {
-                String zipDataFile = getClass().getClassLoader().getResource("zipcode.csv").getFile();
-                zipcodeReader = Utils.openCsv(zipDataFile);
+                zipcodeReader = Utils.openCsv(csPathToZipcode);
                 zipcodeReader.readHeaders();
             }
         }
+
         int rowCount = 0;
         while (zipcodeReader.readRecord()) {
             Map<String, ArrayList> items = new TreeMap<String, ArrayList>();
             int columnCount = 0;
-            String samplId = null;
             String[] values = zipcodeReader.getValues();
             for(String s : zipcodeReader.getHeaders()) {
-                s = s.toLowerCase();
-                if(s.contains("zip".toLowerCase())) {
-                    samplId = values[columnCount];
-                }
-                add(items, s, values[columnCount++]);
+                add(items, s, values[columnCount]);
+                columnCount++;
             }
 
-            zipcodeData.put(samplId, items);
-            rowCount++;
+            zipcodeDatabaseData.put(zipcodeReader.getValues()[0], items);
         }
     }
+//
+//    private void getZipcodeData() throws IOException {
+//        if(zipcodeData.size() == 0) {
+//            if(zipcodeReader == null) {
+//                zipcodeReader = Utils.openCsv(csPathToZipcode);
+//                zipcodeReader.readHeaders();
+//            }
+//        }
+//        int rowCount = 0;
+//        while (zipcodeReader.readRecord()) {
+//            Map<String, ArrayList> items = new TreeMap<String, ArrayList>();
+//            int columnCount = 0;
+//            String samplId = null;
+//            String[] values = zipcodeReader.getValues();
+//            for(String s : zipcodeReader.getHeaders()) {
+//                s = s.toLowerCase();
+//                if(s.contains("zip".toLowerCase())) {
+//                    samplId = values[columnCount];
+//                }
+//                add(items, s, values[columnCount++]);
+//            }
+//
+//            zipcodeData.put(samplId, items);
+//            rowCount++;
+//        }
+//    }
 
-    private void getStateData() throws IOException {
-        if(statesData.size() == 0) {
+    private void getStateDatabaseData() throws IOException {
+        if(stateDatabaseData.size() == 0) {
             if(stateReader == null) {
                 String stateDataFile = getClass().getClassLoader().getResource("states.csv").getFile();
                 stateReader = Utils.openCsv(stateDataFile);
                 stateReader.readHeaders();
             }
-        }
-
-        while (stateReader.readRecord()) {
-            if(stateReader.getValues().length == 2) {
-                statesData.put(stateReader.getValues()[0], stateReader.getValues()[1]);
+            while (stateReader.readRecord()) {
+                if(stateReader.getValues().length == 2) {
+                    stateDatabaseData.put(stateReader.getValues()[0], stateReader.getValues()[1]);
+                }
             }
         }
     }
@@ -225,12 +250,12 @@ public class CsValidation {
         return errors;
     }
 
-    public Map<String, String> getStatesData() {
-        return statesData;
+    public Map<String, String> getStateData() {
+        return stateDatabaseData;
     }
 
-    public Map<String, Map<String, ArrayList>> getZipData() {
-        return zipcodeData;
+    public Map<String, Map<String, ArrayList>> getZipcodeData() {
+        return zipcodeDatabaseData;
     }
 
     public File[] getPhotoList() {

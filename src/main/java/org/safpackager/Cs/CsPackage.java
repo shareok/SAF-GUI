@@ -29,7 +29,8 @@ public class CsPackage {
     private Map<String, Map<String, ArrayList>> newSampleData = new HashMap<String, Map<String, ArrayList>>();
     private Map<String, Map<String, ArrayList>> existingSampleData = new HashMap<String, Map<String, ArrayList>>();
     private List<String> csInfo = new ArrayList();
-    private Map<String, Map<String, ArrayList>> zipcodeData = CsValidation.getInstance().getZipData();
+    private Map<String, Map<String, ArrayList>> zipcodeData = CsValidation.getInstance().getZipcodeData();
+    private Map<String, String> stateData = new HashMap<String, String>();
     private Map<String, ArrayList> csPhotos = new TreeMap<String, ArrayList>();
     private String csCsvPath = null;
     private String csPhotoPath = null;
@@ -43,14 +44,15 @@ public class CsPackage {
         csPhotoPath = pathToPhotos;
         csSavePath = pathToSave;
         csCollectionPath = pathToCollection;
+
         try {
+            stateData = CsValidation.getInstance().getStateData();
             getCollectionData();
             getCsPhotos();
         } catch (IOException ex) {
             Logger.getLogger(CsPackage.class.getName()).log(Level.SEVERE, null, ex);
             csInfo.add("Read errors in collection csv");
         }
-
     }
 
     public void processMetaPack() throws IOException {
@@ -83,12 +85,15 @@ public class CsPackage {
                     }
                     String item = values[columnCount];
                     if(s.equals("dwc.npdg.homestate")) {
-                        Map<String, String> stateData = CsValidation.getInstance().getStatesData();
                         shortState = values[columnCount];
-                        item = stateData.get(shortState) + " - " + item;
+                        if(stateData.isEmpty()) {
+                            item = "Empty - " + item;
+                        } else {
+                            item = stateData.get(shortState) + " - " + item;
+                        }
                     }
                     add(items, s, item);
-                    columnCount++;                
+                    columnCount++;
                 }                
             }
             
@@ -212,9 +217,8 @@ public class CsPackage {
                     spatial.add((String) zipData.get("latitude").get(0));
                     spatial.add((String) zipData.get("longitude").get(0));
                     updated.put("dwc.npdg.spatial", spatial);
-                } else {
-                    updated.put(key, csvItems.get(key));
                 }
+                updated.put(key, csvItems.get(key));
             }
         }
         return updated;
@@ -268,11 +272,26 @@ public class CsPackage {
         xmlWriter.start();
         Map<String, OutputXML> nonDCWriters = new HashMap<String, OutputXML>();
 
-        for(String key : items.keySet()) {
-            if(key.equals("dwc.npdg.sampleid")) {
-                copyPhotos((String) items.get(key).get(0), currentItemDirectory);
-                photoNames = csPhotos.get((String) items.get(key).get(0));
+        if(items.get("dwc.npdg.sampleid").get(0) != null) {
+            copyPhotos((String)items.get("dwc.npdg.sampleid").get(0), currentItemDirectory);
+            photoNames = csPhotos.get((String) items.get("dwc.npdg.sampleid").get(0));
+
+            if(photoNames != null) {
+                if(items.get("dwc.npdg.imagestatus").get(0).equals("P")) {
+                    items.get("dwc.npdg.imagestatus").clear();
+                    items.put("dwc.npdg.imagestatus", new ArrayList<String>());
+                    items.get("dwc.npdg.imagestatus").add("Y");
+                }
+            } else {
+                if(items.get("dwc.npdg.imagestatus").get(0).equals("Y")) {
+                    items.get("dwc.npdg.imagestatus").clear();
+                    items.put("dwc.npdg.imagestatus", new ArrayList<String>());
+                    items.get("dwc.npdg.imagestatus").add("P");
+                }
             }
+        }
+
+        for(String key : items.keySet()) {
             if(key.equals("dc.identifier.uri")) {
                 handle = ((String) items.get(key).get(0)).split("hdl.handle.net\\/")[1];
             }

@@ -94,7 +94,7 @@
                               <Component id="lblHomeApplication" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <EmptySpace pref="185" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -178,7 +178,7 @@
                       <Component id="btnSAFGenerateSAF" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblSAFOutputDir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="177" max="32767" attributes="0"/>
+                      <EmptySpace pref="227" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -247,67 +247,78 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="btnCsOpenPhotos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lblCsPhotoPath" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnCsGenerateSaf" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnCsOpenZipcode" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCsOpenCollection" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCsOpenPhotos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCsOpenCsv" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblCsCollectionPath" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCsPhotoPath" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCsCsvPath" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCsOpenZipcodePath" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btnCsOpenSavePath" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lblCsSavePath" min="-2" pref="367" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnCsOpenCollection" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lblCsCollectionPath" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnCsOpenSavePath" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lblCsSavePath" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnCsGenerateSaf" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnCsOpenCsv" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lblCsCsvPath" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="lblCsAlert" min="-2" pref="547" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="lblCsAlert" min="-2" pref="531" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCsOpenCollection" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCsCollectionPath" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnCsOpenCollection" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCsOpenZipcode" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCsOpenZipcodePath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCsOpenCsv" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCsCsvPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCsOpenPhotos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCsPhotoPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lblCsCollectionPath" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCsOpenCsv" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCsCsvPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCsOpenPhotos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCsPhotoPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCsOpenSavePath" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCsSavePath" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Component id="btnCsGenerateSaf" min="-2" pref="29" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblCsAlert" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -315,7 +326,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnCsOpenCsv">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open cs csv"/>
+                <Property name="text" type="java.lang.String" value="Open new data csv"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCsOpenCsvActionPerformed"/>
@@ -351,13 +362,24 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnCsGenerateSaf">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Generate CS SAF"/>
+                <Property name="text" type="java.lang.String" value="Generate SAF"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCsGenerateSafActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnCsGenerateSaf.setVisible(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCsOpenZipcode">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open Zipcode csv"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCsOpenZipcodeActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnCsOpenZipcode.setVisible(false);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="btnCsOpenPhotos">
@@ -374,6 +396,8 @@
             <Component class="javax.swing.JLabel" name="lblCsPhotoPath">
             </Component>
             <Component class="javax.swing.JLabel" name="lblCsAlert">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblCsOpenZipcodePath">
             </Component>
           </SubComponents>
         </Container>
@@ -444,7 +468,7 @@
                       <Component id="btnCtGenerateTax" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblCtAlert" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="146" max="32767" attributes="0"/>
+                      <EmptySpace pref="196" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -555,7 +579,7 @@
                       <Component id="btnCgGenerateGeo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblCgAlert" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="195" max="32767" attributes="0"/>
+                      <EmptySpace pref="245" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -672,6 +696,47 @@
             <Component class="javax.swing.JLabel" name="lblHelpCSVTitle">
               <Properties>
                 <Property name="text" type="java.lang.String" value="sample csv file: "/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="panCsHelp">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Help">
+                <Property name="tabTitle" type="java.lang.String" value="Help"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="lblHelpPrepareData1" min="-2" pref="563" max="-2" attributes="0"/>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblHelpPrepareData1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblHelpPrepareData1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;b&gt;How to prepare data:&lt;/b&gt;&lt;br/&gt; 1) Export metadata file from CS collection&lt;br/&gt; 2) Download zipcode file and add new entries if need&lt;br/&gt; 3) Convert new CS data excel file to csv&lt;br/&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
           </SubComponents>
