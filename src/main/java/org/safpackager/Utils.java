@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
@@ -13,11 +12,18 @@ import static org.safpackager.SAFPackage.detectCharsetOfFile;
 
 public class Utils {
 
+    public static enum IdType {
+        SAMPLEID,
+        INTERNALID
+    }
+
     public static CsvReader openCsv(String absolutePath) throws IOException {
         CsvReader inputCSV = null;
         InputStream csvStream = new FileInputStream(absolutePath);
         inputCSV = new CsvReader(csvStream, detectCharsetOfFile(absolutePath));
+
         return inputCSV;
+
     }
 
     public static String getCsErrors(Map<String, ArrayList> errors) {

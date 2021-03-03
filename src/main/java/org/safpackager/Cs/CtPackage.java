@@ -5,27 +5,30 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.commons.io.FileUtils;
 import org.safpackager.OutputXML;
 import org.safpackager.Utils;
+import org.safpackager.Utils.IdType;
 
 public class CtPackage {
     private String seperatorRegex = "\\|\\|";
     private String ctCsvPath = null;
     private String ctSavePath = null;
     private String ctCollectionPath = null;
-    private Map<String, ArrayList> ctData;
     private String OutputFilename = "saf-taxonomy";
     private Map<String, Map<String, ArrayList>> taxData = new HashMap<String, Map<String, ArrayList>>();
     private Map<String, Map<String, ArrayList>> collectionData;
+    private List<String> ctInfo = new ArrayList();
 
     public CtPackage(String pathToCollection, String pathToCsv, String pathToSave) {
         ctCollectionPath = pathToCollection;
         ctCsvPath = pathToCsv;
         ctSavePath = pathToSave;
-        CtValidation ctValidation = new CtValidation(ctCollectionPath);
+        // CtValidation ctValidation = new CtValidation(ctCollectionPath, IdType.INTERNALID);
+        CtValidation ctValidation = new CtValidation(ctCollectionPath, IdType.SAMPLEID);
         collectionData = ctValidation.getCollectionDataInstance();
     }
 
@@ -37,30 +40,24 @@ public class CtPackage {
         CsvReader csvReader = null;
         csvReader = Utils.openCsv(ctPathToCSV);
         csvReader.readHeaders();
-
+        int id = 0;
         while (csvReader.readRecord()) {
             Map<String, ArrayList> items = new TreeMap<String, ArrayList>();
             int columnCount = 0;
-            String internalId = null;
             String[] values = csvReader.getValues();
 
-            if(values.length > 0) {
-                for(String s : csvReader.getHeaders()) {
-                    s = Utils.convertCsvMetadata(s.toLowerCase());
-                    if(s.equals("dwc.npdg.internalcode")) {
-                        internalId = values[columnCount];
-                    }
-                    String item = values[columnCount];
-                    if(s.split("\\.").length > 1) {
-                        add(items, s, item);
-                    }
-                    columnCount++;                
+            for(String s : csvReader.getHeaders()) {
+                s = Utils.convertCsvMetadata(s.toLowerCase());
+                String item = values[columnCount];
+                if(s.split("\\.").length > 1) {
+                    add(items, s, item);
                 }
+                columnCount++;
             }
-            taxData.put(internalId, items);
+            taxData.put(String.valueOf(id), items);
+            id++;
         }
 
-        
         prepareSimpleArchiveFormatDir(ctSavePath, OutputFilename);
         processMetaBody(taxData, OutputFilename);
 
@@ -88,6 +85,11 @@ public class CtPackage {
             if(key.equals("dwc.npdg.internalcode")) {
                 String internalcode = (String) items.get(key).get(0);
                 values = collectionData.get(internalcode);
+                acceptedKey = "dc.identifier.uri";
+                acceptedValues = values.get("dc.identifier.uri");
+            } else if(key.equals("dwc.npdg.sampleid")) {
+                String sampleid = (String) items.get(key).get(0);
+                values = collectionData.get(sampleid);
                 acceptedKey = "dc.identifier.uri";
                 acceptedValues = values.get("dc.identifier.uri");
             }
@@ -178,4 +180,11 @@ public class CtPackage {
         return items;
     }
     
+    public List<String> getCsInfo() {
+        if(ctInfo.size() == 0) {
+            ctInfo.add("Taxonomy package was saved in " + ctSavePath);
+        }
+        return ctInfo;
+    }
+
 }

@@ -4,6 +4,8 @@ import com.csvreader.CsvReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,6 @@ public class CsValidation {
     private final Map<String, String> stateDatabaseData = new HashMap<String, String>();
     private static CsValidation validation = null;
     private File[] listOfImages = null;
-    private String csZipcodePath = null;
 
     public CsValidation() {
         try {
@@ -96,7 +97,6 @@ public class CsValidation {
     }
 
     public void validateZipcode(String zipcodePath) throws IOException {
-        csZipcodePath = zipcodePath;
         getZipcodeDatabaseData(zipcodePath);
     }
 
@@ -120,14 +120,11 @@ public class CsValidation {
     }
 
     private void getZipcodeDatabaseData(String csPathToZipcode) throws IOException {
-        if(zipcodeDatabaseData.size() == 0) {
-            if(zipcodeReader == null) {
-                zipcodeReader = Utils.openCsv(csPathToZipcode);
-                zipcodeReader.readHeaders();
-            }
-        }
+        zipcodeDatabaseData.clear();
+        zipcodeReader = null;
+        zipcodeReader = Utils.openCsv(csPathToZipcode);
+        zipcodeReader.readHeaders();
 
-        int rowCount = 0;
         while (zipcodeReader.readRecord()) {
             Map<String, ArrayList> items = new TreeMap<String, ArrayList>();
             int columnCount = 0;
@@ -140,44 +137,19 @@ public class CsValidation {
             zipcodeDatabaseData.put(zipcodeReader.getValues()[0], items);
         }
     }
-//
-//    private void getZipcodeData() throws IOException {
-//        if(zipcodeData.size() == 0) {
-//            if(zipcodeReader == null) {
-//                zipcodeReader = Utils.openCsv(csPathToZipcode);
-//                zipcodeReader.readHeaders();
-//            }
-//        }
-//        int rowCount = 0;
-//        while (zipcodeReader.readRecord()) {
-//            Map<String, ArrayList> items = new TreeMap<String, ArrayList>();
-//            int columnCount = 0;
-//            String samplId = null;
-//            String[] values = zipcodeReader.getValues();
-//            for(String s : zipcodeReader.getHeaders()) {
-//                s = s.toLowerCase();
-//                if(s.contains("zip".toLowerCase())) {
-//                    samplId = values[columnCount];
-//                }
-//                add(items, s, values[columnCount++]);
-//            }
-//
-//            zipcodeData.put(samplId, items);
-//            rowCount++;
-//        }
-//    }
 
     private void getStateDatabaseData() throws IOException {
         if(stateDatabaseData.size() == 0) {
             if(stateReader == null) {
-                String stateDataFile = getClass().getClassLoader().getResource("states.csv").getFile();
-                stateReader = Utils.openCsv(stateDataFile);
+                InputStream is = getClass().getClassLoader().getResourceAsStream("states.csv");
+                stateReader = new CsvReader(is, Charset.forName("UTF-8"));
                 stateReader.readHeaders();
             }
-            while (stateReader.readRecord()) {
-                if(stateReader.getValues().length == 2) {
-                    stateDatabaseData.put(stateReader.getValues()[0], stateReader.getValues()[1]);
-                }
+        }
+
+        while (stateReader.readRecord()) {
+            if(stateReader.getValues().length == 2) {
+                stateDatabaseData.put(stateReader.getValues()[0], stateReader.getValues()[1]);
             }
         }
     }
