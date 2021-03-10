@@ -133,7 +133,7 @@ public class Utils {
     }
 
     public static String getCtErrors(ArrayList<String> errors) {
-        String e = "Invalid Internal Ids: ";
+        String e = "Invalid Ids: ";
 
         String output = "<html>";
         if(errors.size() > 0) {

@@ -74,26 +74,28 @@ public class CsPackage {
             String[] values = csvReader.getValues();
             if(values.length > 0) {
                 for(String s : csvReader.getHeaders()) {
-                    s = Utils.convertCsvMetadata(s.toLowerCase());
-                    if(s.equals("dwc.npdg.sampleid")) {
-                        sampleId = values[columnCount];
-                        if(isExisting(sampleId)) {
-                            existingItems = collectionData.get(sampleId);
-                        } else {
-                            newKey = sampleId;                        
+                    if(!s.equals("")) {
+                        s = Utils.convertCsvMetadata(s.toLowerCase());
+                        if(s.equals("dwc.npdg.sampleid")) {
+                            sampleId = values[columnCount];
+                            if(isExisting(sampleId)) {
+                                existingItems = collectionData.get(sampleId);
+                            } else {
+                                newKey = sampleId;
+                            }
                         }
-                    }
-                    String item = values[columnCount];
-                    if(s.equals("dwc.npdg.homestate")) {
-                        shortState = values[columnCount];
-                        if(stateData.isEmpty()) {
-                            item = "Empty - " + item;
-                        } else {
-                            item = stateData.get(shortState) + " - " + item;
+                        String item = values[columnCount];
+                        if(s.equals("dwc.npdg.homestate")) {
+                            shortState = values[columnCount];
+                            if(stateData.isEmpty()) {
+                                item = "Empty - " + item;
+                            } else {
+                                item = stateData.get(shortState) + " - " + item;
+                            }
                         }
+                        add(items, s, item);
+                        columnCount++;
                     }
-                    add(items, s, item);
-                    columnCount++;
                 }                
             }
             
@@ -212,11 +214,16 @@ public class CsPackage {
             if(key.split("\\.").length > 1) {
                 if(key.equals("dwc.npdg.homezip")) {
                     String zip = (String) csvItems.get(key).get(0);
+                    zip = String.valueOf(Integer.parseInt(zip));
                     Map<String, ArrayList> zipData = zipcodeData.get(zip);
                     ArrayList<String> spatial = new ArrayList<String>();
-                    spatial.add((String) zipData.get("latitude").get(0));
-                    spatial.add((String) zipData.get("longitude").get(0));
-                    updated.put("dwc.npdg.spatial", spatial);
+                    try {
+                        spatial.add((String) zipData.get("latitude").get(0));
+                        spatial.add((String) zipData.get("longitude").get(0));
+                        updated.put("dwc.npdg.spatial", spatial);
+                    } catch (Exception e) {
+                        System.out.print(e);
+                    }
                 }
                 updated.put(key, csvItems.get(key));
             }

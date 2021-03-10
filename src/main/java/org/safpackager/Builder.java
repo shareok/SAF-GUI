@@ -33,12 +33,13 @@ public class Builder extends javax.swing.JFrame {
      * Creates new form Builder
      */
     public Builder() {
-        super("OU - Libraries");
+        // super("OU - Libraries");
+        super("SAF-GUI");
         initComponents();
 //        com.apple.eawt.Application.getApplication().setDockIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
         tabbedPane.remove(5);
         tabbedPane.remove(4);
-        // tabbedPane.remove(1);
+        tabbedPane.remove(1);
     }
 
     private CsValidation validation = null;
