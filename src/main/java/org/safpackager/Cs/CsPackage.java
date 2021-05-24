@@ -341,7 +341,7 @@ public class CsPackage {
             try {
                 mapfileWriter.append(lineSeparator);
                 lineSeparator = System.getProperty("line.separator");
-                mapfileWriter.append(handle);
+                mapfileWriter.append(rowCount + " " + handle);
             } catch (IOException ex) {
                 Logger.getLogger(CsPackage.class.getName()).log(Level.SEVERE, null, ex);
                 csInfo.add("IOException in writing mapfile");

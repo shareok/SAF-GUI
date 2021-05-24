@@ -71,7 +71,11 @@ public class CsValidation {
                         try {
                             int zipCode = Integer.parseInt(values[col]);
                             if(zipCode > 99999 || zipCode < 1){
-                                invalidZipcode.add(inputCSV.get("Sample ID"));
+                                String sid = inputCSV.get("Sample ID");
+                                if(sid.isEmpty()) {
+                                    sid = inputCSV.get("﻿Sample ID");
+                                }
+                                invalidZipcode.add(sid);
                             }
                         } catch(Exception e) {
                             System.out.println(e.getMessage());;
@@ -86,8 +90,13 @@ public class CsValidation {
                     col++;
                 }
             }
+
             if(!isZipPlaceMatched(zip, state, city)){
-                zipAddressNotMached.add(inputCSV.get("Sample ID"));
+                String samplid = inputCSV.get("Sample ID");
+                if(samplid.isEmpty()) {
+                    samplid = inputCSV.get("﻿Sample ID");
+                }
+                zipAddressNotMached.add(samplid);
             }
         }
         if(!invalidHeadings.isEmpty()) {
@@ -120,7 +129,7 @@ public class CsValidation {
             stateData = zipdata.get("state");
             cityData = zipdata.get("city");
 
-            if(StringUtils.equals(stateData.get(0), homeState) && !homeCity.isEmpty()){
+            if(StringUtils.equals(stateData.get(0), homeState.toUpperCase()) && !homeCity.isEmpty()){
                 return true;
             }
         }
