@@ -86,11 +86,11 @@ public class CsPackage {
                         }
                         String item = values[columnCount];
                         if(s.equals("dwc.npdg.homestate")) {
-                            shortState = values[columnCount];
+                            shortState = values[columnCount].toUpperCase();
                             if(stateData.isEmpty()) {
                                 item = "Empty - " + item;
                             } else {
-                                item = stateData.get(shortState) + " - " + item;
+                                item = stateData.get(shortState) + " - " + item.toUpperCase();
                             }
                         }
                         add(items, s, item);
