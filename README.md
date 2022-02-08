@@ -1,0 +1,2 @@
+# SAF-GUI
+SAF-GUI is a tool to pack data as DSpace Simple Archive Format for batch import to DSpace collections. SAF is an archive, which is a directory containing one subdirectory per item. Each item directory contains a file for the item's descriptive metadata, and the files that make up the item. SAF-GUI installers provide a simple way to install the tool in Linux, Windows and macOS.
